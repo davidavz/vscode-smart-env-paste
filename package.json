@@ -2,13 +2,14 @@
   "name": "smart-env-paste",
   "displayName": "Smart Env Paste",
   "description": "Paste missing keys from .env.dist into .env files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "davidavz",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/davidavz/vscode-smart-env-paste.git"
   },
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.102.0"
   },
