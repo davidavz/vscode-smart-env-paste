@@ -1,0 +1,91 @@
+{
+  "name": "smart-env-paste",
+  "displayName": "Smart Env Paste",
+  "description": "Paste missing keys from .env.dist into .env files",
+  "version": "1.0.0",
+  "publisher": "davidavz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidavz/vscode-smart-env-paste.git"
+  },
+  "engines": {
+    "vscode": "^1.102.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "env",
+    "dotenv",
+    ".env",
+    "paste",
+    "sync"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartEnvPaste.pasteMissingKeys",
+        "title": "Smart Env Paste: Paste Missing Env Keys"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "smartEnvPaste.pasteMissingKeys",
+          "when": "editorTextFocus"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "smartEnvPaste.pasteMissingKeys",
+        "key": "cmd+shift+v",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Smart Env Paste",
+      "properties": {
+        "smartEnvPaste.filePattern": {
+          "type": "string",
+          "default": "^\\.env(\\.\\w+)?$",
+          "description": "Regex to match env file names."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "compile-tests": "tsc -p . --outDir out",
+    "format": "prettier --check .",
+    "lint": "eslint src",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "test": "vscode-test",
+    "test-unit": "pnpm run compile-tests && node --test out/test/**/*.js",
+    "vscode:prepublish": "pnpm run package",
+    "watch": "npm-run-all -p watch:*",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/mocha": "10.0.10",
+    "@types/node": "24.0.14",
+    "@types/vscode": "1.102.0",
+    "@typescript-eslint/eslint-plugin": "8.37.0",
+    "@typescript-eslint/parser": "8.37.0",
+    "@vscode/test-cli": "0.0.11",
+    "@vscode/test-electron": "2.5.2",
+    "esbuild": "0.25.6",
+    "eslint": "9.31.0",
+    "npm-run-all": "4.1.5",
+    "prettier": "3.6.2",
+    "typescript": "5.8.3"
+  }
+}
